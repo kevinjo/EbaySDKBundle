@@ -1,0 +1,30 @@
+{
+    "name": "winzou/ebay-sdk-bundle",
+    "type": "symfony-bundle",
+    "description": "Bundle the dts/ebay-sdk library",
+    "keywords": ["symfony", "bundle", "ebay"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexandre Bacco",
+            "homepage": "http://alex.bacco.fr"
+        }
+    ],
+    "require": {
+        "php":                       ">5.3.3",
+        "symfony/framework-bundle":  "~2.2",
+        "dts/ebay-sdk-finding":      "~0.2"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.0"
+    },
+    "autoload": {
+        "psr-4": { "winzou\\Bundle\\EbaySDKBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "spec\\": "spec/" }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
