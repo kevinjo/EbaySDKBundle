@@ -12,6 +12,7 @@
 namespace winzou\Bundle\EbaySDKBundle\Ebay;
 
 use DTS\eBaySDK\Finding\Services\FindingService;
+use DTS\eBaySDK\Finding\Types\FindItemsAdvancedRequest;
 use DTS\eBaySDK\Finding\Types\FindItemsByKeywordsRequest;
 
 class Finding
@@ -39,6 +40,34 @@ class Finding
         $request->keywords = $keywords;
 
         $response = $this->service->findItemsByKeywords($request);
+
+        if (!isset($response->searchResult->item)) {
+            return array();
+        }
+
+        return $response->searchResult->item;
+    }
+
+    /**
+     * @param string $keywords
+     * @param array  $categoryId
+     * @return array|\DTS\eBaySDK\Finding\Types\SearchItem[]
+     */
+    public function findItemsAdvanced($keywords = null, $categoryId = array(), array $outputSelector = array())
+    {
+        $request = new FindItemsAdvancedRequest();
+
+        if (null !== $keywords) {
+            $request->keywords = $keywords;
+        }
+        if (null !== $categoryId) {
+            $request->categoryId = $categoryId;
+        }
+        if (null !== $categoryId) {
+            $request->outputSelector = $outputSelector;
+        }
+
+        $response = $this->service->findItemsAdvanced($request);
 
         if (!isset($response->searchResult->item)) {
             return array();
